@@ -97,6 +97,26 @@ void encode(Node* root, string str, map<char, string> &huffmanCode)
     encode(root->right, str + "1", huffmanCode);
 }
 
+string decode(Node* root,string a){
+    string out = "";
+    struct Node* curr = root;
+    for(int i = 0;i <a.size();i++){
+        if(a[i] == '0'){
+            curr = curr->left;
+        }
+        else{
+            curr = curr->right;
+        }
+
+        if(curr->left == NULL && curr->right == NULL){
+            out += curr->c; 
+            curr = root; 
+        }
+    }
+
+    return out + '\0';
+}
+
 
 int main(int argc, char** argv) {
     fstream textfile = open_file("test.txt");
@@ -145,8 +165,13 @@ int main(int argc, char** argv) {
         output += codes[input[i]];
     }
 
+    //printing encdoed binary string 
+
     cout << output << "\n";
 
 
+    //decoding binary string 
+    string final = decode(root,output);
+    cout<< final <<endl;
     textfile.close();
 }
