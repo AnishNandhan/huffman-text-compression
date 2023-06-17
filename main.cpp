@@ -121,13 +121,9 @@ priority_queue<Node*, vector<Node*>, compareNode> makePQ(const string& infile) {
     priority_queue<Node*, vector<Node*>, compareNode> q;
 
     for(int i = 0; i < 128; i++) {
-        if(freq_table.getFreq((char)i) != 0) {
+        if(freq_table.getFreq((char)i) != 0 && i != 30) {
             q.push(new Node((char)i, freq_table.getFreq((char)i)));
         }
-    }
-
-    if(freq_table.getFreq('\n') != 0) {
-        q.push(new Node('\n', freq_table.getFreq('\n')));
     }
 
     return q;
@@ -154,6 +150,8 @@ void saveEncode(const string& infile, priority_queue<Node*, vector<Node*>, compa
     outfile.open("encoded", ios::out | ios::binary);
 
     string in = "", s = "";
+
+    in += (char)q.size();
 
     while (!q.empty())
 	{//get all characters and their huffman codes for output
@@ -220,8 +218,10 @@ inline void build_tree(string& path, char a_code, Node* root)
 Node* rebuildHuffmanTree(const string& in_file_name){
     fstream in_file;
 	in_file.open(in_file_name, ios::in | ios::binary);
+
 	unsigned char size;																			//unsigned char to get number of node of humman tree
 	in_file.read(reinterpret_cast<char*>(&size), 1);
+
 	Node *root = new Node;
 	for (int i = 0; i < size; i++)
 	{
@@ -293,21 +293,20 @@ void decoding_save(const string& in_file_name, Node* root){
 
 
 int main(int argc, char** argv) {
-    string input = "";
-    string output = "";
+    // priority_queue<Node*, vector<Node*>, compareNode> q = makePQ("test.txt");
 
-    char ch;
+    // Node* tree = buildHuffmanTree(q);
 
-    priority_queue<Node*, vector<Node*>, compareNode> q = makePQ("test.txt");
+    // map<char, string> codes;
 
-    Node* tree = buildHuffmanTree(q);
+    // encode(tree, "", codes);
 
-    map<char, string> codes;
+    // saveEncode("test.txt", q, codes);
 
-    encode(tree, "", codes);
+    // for(auto& pair : codes) {
+    //     cout << pair.first << " " << pair.second << '\n';
+    // }
 
-    saveEncode("test.txt", q, codes);
-
-    tree = rebuildHuffmanTree("encoded");
-    // decoding_save("encoded", tree);
+    Node* tree = rebuildHuffmanTree("encoded");
+    decoding_save("encoded", tree);
 }
