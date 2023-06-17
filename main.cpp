@@ -97,7 +97,7 @@ void encode(Node* root, string str, map<char, string> &huffmanCode)
     encode(root->right, str + "1", huffmanCode);
 }
 
-string decode(Node* root,string a){
+string decode(Node* root, string a){
     string out = "";
     struct Node* curr = root;
     for(int i = 0;i <a.size();i++){
@@ -171,7 +171,7 @@ int main(int argc, char** argv) {
 
 
     //decoding binary string 
-    string final = decode(root,output);
+    string final = decode(root, output);
     cout<< final <<endl;
     textfile.close();
 }
