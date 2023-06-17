@@ -12,6 +12,28 @@ fstream open_file(char* filename) {
     return myfile;
 }
 
+class Heap {
+
+};
+
+class Node {
+    char c;
+    int freq;
+    struct Node* left;
+    struct Node* right;
+
+    Node(char c, int freq, struct Node* left = NULL, struct Node* right = NULL) {
+        this->c = c;
+        this->freq = freq;
+        this->left = left;
+        this->right = right;
+    }
+
+    bool lt(const Node& other) {
+        return this->freq < other.freq;
+    }
+};
+
 class HashTable {
     private:
         vector<int> table;
@@ -36,6 +58,8 @@ class HashTable {
             return table[ascii];
         }
 };
+
+
 
 int main(int argc, char** argv) {
     fstream textfile = open_file("test.txt");
