@@ -101,14 +101,14 @@ void encode(Node* root, string str, map<char, string> &huffmanCode)
 int main(int argc, char** argv) {
     fstream textfile = open_file("test.txt");
     HashTable freq_table;
-    // string input = "";
-    // string output = "";
+    string input = "";
+    string output = "";
 
     char ch;
 
     while(textfile.get(ch)) {
         freq_table.insert(ch);
-        // input = input + ch;
+        input = input + ch;
     }
 
     priority_queue<Node*, vector<Node*>, compareNode> tree;
@@ -141,11 +141,11 @@ int main(int argc, char** argv) {
 
     encode(root, "", codes);
 
-    // for(int i = 0; i < input.length(); i++) {
-    //     cout << input[i];
-    // }
+    for(int i = 0; i < input.length(); i++) {
+        output += codes[input[i]];
+    }
 
-    // cout << output << "\n";
+    cout << output << "\n";
 
 
     textfile.close();
