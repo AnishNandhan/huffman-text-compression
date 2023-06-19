@@ -15,14 +15,11 @@ class HashTable {
 
         void insert(char c) {
             int ascii = (int)c;
-            ascii = ascii - 32;
             table[ascii]++;
         }
 
         int getFreq(char c) {
             int ascii = (int)c;
-            ascii = ascii - 32;
-
             return table[ascii];
         }
 
