@@ -1,5 +1,7 @@
 # huffman-text-compression
 
+C++ implementation of the lossless Huffman compression algorithm.
+
 Compile with:
 ```
 g++ main.cpp hashtable.cpp
