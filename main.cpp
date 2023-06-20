@@ -128,7 +128,7 @@ Node* buildHuffmanTree(priority_queue<Node*, vector<Node*>, compareNode> temp) {
 void saveEncode(const string& infile, priority_queue<Node*, vector<Node*>, compareNode> q, map<char, string>& codes) {
     fstream outfile, textfile;
     textfile.open(infile, ios::in);
-    outfile.open("encoded", ios::out | ios::binary);
+    outfile.open("encoded.ng", ios::out | ios::binary);
 
     string in = "", s = "";
 
@@ -173,7 +173,7 @@ void saveEncode(const string& infile, priority_queue<Node*, vector<Node*>, compa
 
 	outfile.write(in.c_str(), in.size());
 
-	cout << "Encoded file saves as 'encoded'\n";
+	cout << "Encoded file saves as 'encoded.ng'\n";
 
 	textfile.close();
 	outfile.close();
